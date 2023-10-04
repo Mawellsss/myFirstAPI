@@ -1,0 +1,57 @@
+GET http://localhost:3000/employee
+
+###
+GET http://localhost:3000/employee/651c8839f9ae51d9b3fda434
+
+###
+POST http://localhost:3000/employee
+Content-Type: application/json
+
+{
+    "employeeNumber": "ABC-123",
+    "firstName": "Mark Well",
+    "middleName": "Sambrano",
+    "lastName": "Mapanao",
+    "dob": "04-11-1996",
+    "gender": "Male",
+    "maritalStatus": "Married",
+    "regionCode": "06",
+    "provinceCode": "0604",
+    "cityCode": "060406",
+    "barangayCode": "060406024",
+    "tin": "222222222222",
+    "sssId": "987654321",
+    "hdmf": "567890123",
+    "phic": "345678901",
+    "email": "mark.well@gmail.com",
+    "contactNo": "+63123545658",
+    "isActive": true,
+    "qualifiedDependents": [
+    {
+      "name": "Jane Smith",
+      "dob": "2010-03-20",
+      "relationship": "Child"
+    },
+    {
+      "name": "Mary Smith",
+      "dob": "2015-08-10",
+      "relationship": "Child"
+    }
+  ],
+  "trainingDetails": [
+    {
+      "trainingName": "First Aid Certification",
+      "dateStart": "2022-05-10",
+      "dateEnd": "2022-05-12",
+      "certificateUrl": "https://example.com/certificate1.pdf",
+      "remarks": "Completed with honors"
+    },
+    {
+      "trainingName": "Safety Training",
+      "dateStart": "2022-06-15",
+      "dateEnd": "2022-06-17",
+      "certificateUrl": "https://example.com/certificate2.pdf",
+      "remarks": "Passed"
+    }
+  ]
+}
