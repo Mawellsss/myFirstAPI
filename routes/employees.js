@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const Employee = require("../models/employees");
-const axios = require("axios");
 const middleware = require("../middleware/validation");
 
 // POST Create Employee Details
@@ -31,10 +30,10 @@ router.post(
     );
 
     const address = {
-      region: regionData.name,
-      province: provinceData.name,
-      city: cityData.name,
-      barangay: barangayData.name,
+      region: regionData.id,
+      province: provinceData.id,
+      city: cityData.id,
+      barangay: barangayData.id,
     };
 
     const employee = new Employee({
@@ -67,7 +66,7 @@ router.post(
 // GET ALL Employee Details
 router.get("/", async (req, res) => {
   try {
-    const employees = await Employee.find();
+    const employees = await Employee.find({ isActive: true });
     res.status(200).json(employees);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -83,7 +82,92 @@ router.get("/:id", middleware.checkEmployee, (req, res) => {
 router.put("/:id", middleware.checkEmployee, (req, res) => {});
 
 // PATCH
-router.patch("/:id", middleware.checkEmployee, (req, res) => {});
+router.patch("/:id", middleware.checkEmployee, async (req, res) => {
+  if (req.body.regionCode != null) {
+  }
+  const regionData = await middleware.fetchLocationData(
+    "regions",
+    req.body.regionCode
+  );
+  const provinceData = await middleware.fetchLocationData(
+    "provinces",
+    req.body.provinceCode
+  );
+  const cityData = await middleware.fetchLocationData(
+    "cities",
+    req.body.cityCode
+  );
+  const barangayData = await middleware.fetchLocationData(
+    "barangays",
+    req.body.barangayCode
+  );
+
+  const address = {
+    region: regionData.name,
+    province: provinceData.name,
+    city: cityData.name,
+    barangay: barangayData.name,
+  };
+
+  if (address.region != null) {
+    res.employee.address = address;
+  }
+
+  if (req.body.employeeNumber != null) {
+    res.employee.employeeNumber = req.body.employeeNumber;
+  }
+  if (req.body.firstName != null) {
+    res.employee.firstName = req.body.firstName;
+  }
+  if (req.body.lastName != null) {
+    res.employee.lastName = req.body.lastName;
+  }
+  if (req.body.middleName != null) {
+    res.employee.middleName = req.body.middleName;
+  }
+  if (req.body.dob != null) {
+    res.employee.dob = req.body.dob;
+  }
+  if (req.body.gender != null) {
+    res.employee.gender = req.body.gender;
+  }
+  if (req.body.maritalStatus != null) {
+    res.employee.maritalStatus = req.body.maritalStatus;
+  }
+  if (req.body.tin != null) {
+    res.employee.tin = req.body.tin;
+  }
+  if (req.body.sssId != null) {
+    res.employee.sssId = req.body.sssId;
+  }
+  if (req.body.hdmf != null) {
+    res.employee.hdmf = req.body.hdmf;
+  }
+  if (req.body.phic != null) {
+    res.employee.phic = req.body.phic;
+  }
+  if (req.body.email != null) {
+    res.employee.email = req.body.email;
+  }
+  if (req.body.contactNo != null) {
+    res.employee.contactNo = req.body.contactNo;
+  }
+  if (req.body.qualifiedDependents != null) {
+    res.employee.hdmf = req.body.qualifiedDependents;
+  }
+  if (req.body.trainingDetails != null) {
+    res.employee.hdmf = req.body.trainingDetails;
+  }
+  if (req.body.isActive != null) {
+    res.employee.isActive = req.body.isActive;
+  }
+  try {
+    const updatedEmployee = await res.employee.save();
+    res.json(updatedEmployee);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
 
 // DELETE
 router.delete("/:id", middleware.checkEmployee, (req, res) => {});

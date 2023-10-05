@@ -13,9 +13,7 @@ const fetchLocationData = async function fetchLocationData(
     );
     return response.data; // Assuming the API response is JSON data
   } catch (error) {
-    throw new Error(
-      `Error fetching ${locationType} data from the API for code ${locationCode}`
-    );
+    return error.message;
   }
 };
 

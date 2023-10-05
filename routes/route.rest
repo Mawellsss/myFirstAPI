@@ -1,17 +1,17 @@
 GET http://localhost:3000/employee
 
 ###
-GET http://localhost:3000/employee/651c8839f9ae51d9b3fda434
+GET http://localhost:3000/employee/651e4957648181bd15b3da56
 
 ###
 POST http://localhost:3000/employee
 Content-Type: application/json
 
 {
-    "employeeNumber": "ABC-123",
-    "firstName": "Mark Well",
-    "middleName": "Sambrano",
-    "lastName": "Mapanao",
+    "employeeNumber": "ABC-125",
+    "firstName": "MANNY",
+    "middleName": "PACMAN",
+    "lastName": "PACQUIAO",
     "dob": "04-11-1996",
     "gender": "Male",
     "maritalStatus": "Married",
@@ -23,29 +23,22 @@ Content-Type: application/json
     "sssId": "987654321",
     "hdmf": "567890123",
     "phic": "345678901",
-    "email": "mark.well@gmail.com",
-    "contactNo": "+63123545658",
+    "email": "manny@gmail.com",
+    "contactNo": "+63123545657",
     "isActive": true,
     "qualifiedDependents": [
     {
-      "name": "Jane Smith",
+      "name": "Jane PACQUIAO",
       "dob": "2010-03-20",
       "relationship": "Child"
     },
     {
-      "name": "Mary Smith",
+      "name": "Mary PACQUIAO",
       "dob": "2015-08-10",
       "relationship": "Child"
     }
   ],
   "trainingDetails": [
-    {
-      "trainingName": "First Aid Certification",
-      "dateStart": "2022-05-10",
-      "dateEnd": "2022-05-12",
-      "certificateUrl": "https://example.com/certificate1.pdf",
-      "remarks": "Completed with honors"
-    },
     {
       "trainingName": "Safety Training",
       "dateStart": "2022-06-15",
@@ -54,4 +47,12 @@ Content-Type: application/json
       "remarks": "Passed"
     }
   ]
+}
+
+###
+PATCH  http://localhost:3000/employee/651e4957648181bd15b3da56
+Content-Type: : application/json
+
+{
+    "isActive": false,
 }
