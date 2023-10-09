@@ -79,7 +79,55 @@ router.get("/:id", middleware.checkEmployee, (req, res) => {
 });
 
 // PUT
-router.put("/:id", middleware.checkEmployee, (req, res) => {});
+router.put("/:id", middleware.checkEmployee, async (req, res) => {
+  const regionCode = req.body.regionCode;
+  const provinceCode = req.body.provinceCode;
+  const cityCode = req.body.cityCode;
+  const barangayCode = req.body.barangayCode;
+
+  const regionData = await middleware.fetchLocationData("regions", regionCode);
+  const provinceData = await middleware.fetchLocationData(
+    "provinces",
+    provinceCode
+  );
+  const cityData = await middleware.fetchLocationData("cities", cityCode);
+  const barangayData = await middleware.fetchLocationData(
+    "barangays",
+    barangayCode
+  );
+
+  const address = {
+    region: regionData.id,
+    province: provinceData.id,
+    city: cityData.id,
+    barangay: barangayData.id,
+  };
+
+  const employee = new Employee({
+    employeeNumber: req.body.employeeNumber,
+    firstName: req.body.firstName,
+    middleName: req.body.middleName,
+    lastName: req.body.lastName,
+    dob: req.body.dob,
+    gender: req.body.gender,
+    maritalStatus: req.body.maritalStatus,
+    address: address,
+    tin: req.body.tin,
+    sssId: req.body.sssId,
+    hdmf: req.body.hdmf,
+    phic: req.body.phic,
+    email: req.body.email,
+    contactNo: req.body.contactNo,
+    qualifiedDependents: req.body.qualifiedDependents,
+    trainingDetails: req.body.trainingDetails,
+  });
+  try {
+    const updateEmployee = await employee.save();
+    res.status(200).json(updateEmployee);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 
 // PATCH
 router.patch("/:id", middleware.checkEmployee, async (req, res) => {
@@ -170,6 +218,14 @@ router.patch("/:id", middleware.checkEmployee, async (req, res) => {
 });
 
 // DELETE
-router.delete("/:id", middleware.checkEmployee, (req, res) => {});
+router.delete("/:id", middleware.checkEmployee, async (req, res) => {
+  try {
+    res.employee.isActive = false;
+    const deletedEmployee = await res.employee.save();
+    res.json(deletedEmployee);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 
 module.exports = router;

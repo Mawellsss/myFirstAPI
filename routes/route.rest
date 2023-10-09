@@ -1,7 +1,8 @@
 GET http://localhost:3000/employee
 
 ###
-GET http://localhost:3000/employee/651e4957648181bd15b3da56
+GET http://localhost:3000/employee/651fb6147faa80f7bb87ba47
+
 
 ###
 POST http://localhost:3000/employee
@@ -56,3 +57,6 @@ Content-Type: : application/json
 {
     "isActive": false,
 }
+
+###
+DELETE http://localhost:3000/employee/651fb6147faa80f7bb87ba47
