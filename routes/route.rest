@@ -3,6 +3,57 @@ GET http://localhost:3000/employee
 ###
 GET http://localhost:3000/employee/651fb6147faa80f7bb87ba47
 
+###
+POST http://localhost:3000/employee
+Content-Type: application/json
+test
+{
+    "employeeNumber": "ABC-127",
+    "firstName": "MARK",
+    "middleName": "DELA CRUZ",
+    "lastName": "SANTOS",
+    "dob": "05-11-1993",
+    "gender": "Male",
+    "maritalStatus": "Married",
+    "regionCode": "06",
+    "provinceCode": "0604",
+    "cityCode": "060406",
+    "barangayCode": "060406024",
+    "tin": "222222222222",
+    "sssId": "987654321",
+    "hdmf": "567890123",
+    "phic": "345678901",
+    "email": "mark@gmail.com",
+    "contactNo": "+63012365254",
+    "qualifiedDependents": [
+    {
+      "name": "Jane SANTOS",
+      "dob": "2010-03-20",
+      "relationship": "Child"
+    },
+    {
+      "name": "Mary SANTOS",
+      "dob": "2015-08-10",
+      "relationship": "Child"
+    }
+  ],
+  "trainingDetails": [
+    {
+      "trainingName": "Safety Training",
+      "dateStart": "2022-06-15",
+      "dateEnd": "2022-06-17",
+      "certificateUrl": "https://example.com/certificate2.pdf",
+      "remarks": "Passed"
+    },
+        {
+      "trainingName": "Safety Training2",
+      "dateStart": "2022-06-15",
+      "dateEnd": "2022-06-17",
+      "certificateUrl": "https://example.com/certificate2.pdf",
+      "remarks": "Passed"
+    }
+  ]
+}
 
 ###
 POST http://localhost:3000/employee
